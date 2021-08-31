@@ -1,0 +1,20 @@
+
+<div class="bg-dark">
+  <img src="assets\ui\truescape-logo-light.png" 
+    alt="truescape-logo" 
+    class="img-fluid float-right p-3 logo d-block">
+</div>
+
+<nav *ngIf="isAuth" class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="navbar-nav">
+      <a class="nav-item nav-link" routerLink="/">Home</a>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="row">
+      <div class="col-sm-6 offset-sm-3">
+          <router-outlet></router-outlet>
+      </div>
+  </div>
+</div>
