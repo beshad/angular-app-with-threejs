@@ -1,1 +1,6 @@
-<p>home works!</p>
+<div>
+    <mat-button-toggle-group [value]="selectedStage" (change)="onStageChange($event)" class="border" >
+        <mat-button-toggle [value]="preMiningStage">Pre-mining</mat-button-toggle>
+        <mat-button-toggle [value]="miningStage">Mining</mat-button-toggle>
+    </mat-button-toggle-group>
+</div>

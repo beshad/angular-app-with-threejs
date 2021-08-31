@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { appRoutingModule } from './app.routing';
 import { HttpClientModule } from '@angular/common/http';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, HomeComponent],
@@ -15,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
     appRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatButtonToggleModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
