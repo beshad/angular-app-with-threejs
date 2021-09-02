@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of, BehaviorSubject } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
+  public currentUserName$ = new BehaviorSubject('');
+
   constructor(private http: HttpClient) {}
 
   public isAuthenticated(): boolean {
     const userName = sessionStorage.getItem('currentUserName');
+    this.currentUserName$.next(userName || '');
     return !!userName;
   }
 
@@ -18,6 +21,7 @@ export class AuthenticationService {
       startWith(true),
       map((result) => {
         if (result) {
+          this.currentUserName$.next(username);
           sessionStorage.setItem('currentUserName', username);
         }
         return result;

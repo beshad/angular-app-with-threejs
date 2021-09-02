@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { AuthenticationService } from './services/authentication.service';
 
 @Component({
@@ -8,14 +9,24 @@ import { AuthenticationService } from './services/authentication.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  public title = 'truescape-test-app';
   public isAuth: boolean = false;
 
-  constructor(
-    private authService: AuthenticationService,
-    private router: Router
-  ) {
-    this.isAuth = this.authService.isAuthenticated();
-    // this.authService.isAuth$.subscribe((isAuth) => (this.isAuth = isAuth));
+  private ngUnSubscribe$ = new Subject();
+
+  ngOnDestroy() {
+    this.ngUnSubscribe$.next();
+    this.ngUnSubscribe$.complete();
+  }
+
+  constructor(private authService: AuthenticationService) {}
+
+  ngOnInit() {
+    this.checkAuthValue();
+  }
+
+  private checkAuthValue() {
+    this.authService.currentUserName$
+      .pipe(takeUntil(this.ngUnSubscribe$))
+      .subscribe((userName) => (this.isAuth = !!userName));
   }
 }
