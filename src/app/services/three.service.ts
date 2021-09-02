@@ -59,9 +59,8 @@ export class ThreeService {
 
     this.scene.add(this.group);
 
-    this.dragControls = new DragControls([this.group], this.camera, canvas);
-    this.dragControls.transformGroup = true;
-    this.dragControls.addEventListener('dragend', () => this.render);
+    // Disable the dragControl as it does not perform as expected
+    // this.setupDragControl(canvas);
 
     this.renderer.render(this.scene, this.camera);
     canvas.addEventListener(
@@ -140,7 +139,8 @@ export class ThreeService {
     event: MouseEvent,
     pinAndMediaPath: PinAndMediaPath
   ) => {
-    this.handleOrbitControlsWhenDraging();
+    // Disable the dragControl as it does not perform as expected
+    // this.handleOrbitControlsWhenDraging();
     this.loadPinMedia(event, pinAndMediaPath);
   };
 
@@ -185,6 +185,13 @@ export class ThreeService {
     this.dragControls.removeEventListener('dragend', (event) => {
       this.orbitControls.enabled = true;
     });
+  }
+
+  private setupDragControl(canvas: HTMLCanvasElement) {
+    this.dragControls = new DragControls([this.group], this.camera, canvas);
+    this.dragControls.transformGroup = true;
+
+    this.dragControls.addEventListener('dragend', () => this.render);
   }
 
   private frameArea(
