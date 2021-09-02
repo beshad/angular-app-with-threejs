@@ -8,7 +8,7 @@ export class AuthenticationService {
   constructor(private http: HttpClient) {}
 
   public isAuthenticated(): boolean {
-    const userName = localStorage.getItem('currentUserName');
+    const userName = sessionStorage.getItem('currentUserName');
     return !!userName;
   }
 
@@ -18,7 +18,7 @@ export class AuthenticationService {
       startWith(true),
       map((result) => {
         if (result) {
-          localStorage.setItem('currentUserName', username);
+          sessionStorage.setItem('currentUserName', username);
         }
         return result;
       })

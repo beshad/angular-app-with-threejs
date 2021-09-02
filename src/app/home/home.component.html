@@ -6,3 +6,23 @@
 </div>
 
 <canvas #rendererCanvas id="renderCanvas"></canvas>
+
+<button id="videoDialogBtn" mat-button (click)="openDialog()" hidden>Open dialog</button>
+<ng-template #videoTemplate>
+    <mat-dialog-content > 
+        <div >
+            <video id="video" class="videoSize" crossOrigin="anonymous" playsinline controls>
+                <source [src]= "videoPath" 
+                type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'> 
+            </video>
+        </div>
+    </mat-dialog-content>
+    <div mat-dialog-actions>
+        <button mat-button mat-dialog-close class="btn btn-primary btn-block" >
+            Close
+        </button>
+    </div>
+</ng-template>
+
+
+

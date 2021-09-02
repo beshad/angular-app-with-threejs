@@ -35,3 +35,7 @@ export const miningFacilitiesFilePath: FileCombination = {
     'assets/3d-assets/Textures/Rom pad.jpg',
   ],
 };
+
+export const pinPath: string = 'assets/ui/Pin.png';
+
+export const mp4Path: string = 'assets/media/Bowdens Silver Overview.mp4';
